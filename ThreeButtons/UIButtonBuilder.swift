@@ -18,6 +18,28 @@ class AnimatedButton: UIButton {
         setupButton()
     }
 
+    override func tintColorDidChange() {
+        super.tintColorDidChange()
+        switch tintAdjustmentMode {
+        case .dimmed:
+            setAppearance(isDimmed: true)
+        default:
+            setAppearance(isDimmed: false)
+        }
+    }
+
+    private func setAppearance(isDimmed: Bool) {
+        if isDimmed {
+            self.tintColor = .systemGray2
+            self.imageView?.tintColor = .systemGray3
+            self.titleLabel?.textColor = .systemGray3
+        } else {
+            self.tintColor = .systemBlue
+            self.imageView?.tintColor = .white
+            self.titleLabel?.textColor = .white
+        }
+    }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupButton()
